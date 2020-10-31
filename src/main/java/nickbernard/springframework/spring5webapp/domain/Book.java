@@ -1,6 +1,7 @@
 package nickbernard.springframework.spring5webapp.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -20,17 +21,17 @@ public class Book {
     @ManyToMany
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
              inverseJoinColumns = @JoinColumn(name = "author_id"))
-    private Set<Author> authors;
+    private Set<Author> authors = new HashSet<>();
 
     // 0-arg constructor, as is required by JPA
     public Book() {
     }
 
     // regular constructor
-    public Book(String title, String isbn, Set<Author> authors) {
+    public Book(String title, String isbn) {
         this.title = title;
         this.isbn = isbn;
-        this.authors = authors;
+        //this.authors = authors;
     }
 
     // getters and setters (next 8 functions)
@@ -50,6 +51,7 @@ public class Book {
         this.isbn = isbn;
     }
 
+
     public Set<Author> getAuthors() {
         return authors;
     }
@@ -57,6 +59,7 @@ public class Book {
     public void setAuthors(Set<Author> authors) {
         this.authors = authors;
     }
+
 
     public Long getId() {
         return id;
