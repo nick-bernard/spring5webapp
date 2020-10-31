@@ -1,15 +1,25 @@
 package nickbernard.springframework.spring5webapp.domain;
 
+import javax.persistence.*;
 import java.util.Set;
 
 /**
  * Created by Nicholas Bernard on Oct, 2020
  */
 
+@Entity
 public class Book {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     private String title;
     private String isbn;
+
+    @ManyToMany
+    @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
+             inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors;
 
     // 0-arg constructor, as is required by JPA
@@ -23,7 +33,7 @@ public class Book {
         this.authors = authors;
     }
 
-    // getters and setters (next 6 functions)
+    // getters and setters (next 8 functions)
     public String getTitle() {
         return title;
     }
@@ -46,5 +56,13 @@ public class Book {
 
     public void setAuthors(Set<Author> authors) {
         this.authors = authors;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
