@@ -3,7 +3,7 @@ package nickbernard.springframework.spring5webapp.domain;
 import java.util.Set;
 
 /**
- * Created by nick on Oct, 2020
+ * Created by Nicholas Bernard on Oct, 2020
  */
 
 public class Book {
