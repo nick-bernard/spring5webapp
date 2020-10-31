@@ -18,6 +18,9 @@ public class Book {
     private String title;
     private String isbn;
 
+    @ManyToOne // many books can be assigned to one publisher, but not the inverse
+    private Publisher publisher;
+
     @ManyToMany
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
              inverseJoinColumns = @JoinColumn(name = "author_id"))
@@ -34,7 +37,7 @@ public class Book {
         //this.authors = authors;
     }
 
-    // getters and setters (next 8 functions)
+    // getters and setters (next 10 functions)
     public String getTitle() {
         return title;
     }
@@ -60,13 +63,20 @@ public class Book {
         this.authors = authors;
     }
 
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
     }
 
     @Override

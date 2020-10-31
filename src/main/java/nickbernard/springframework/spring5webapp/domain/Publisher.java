@@ -1,9 +1,8 @@
 package nickbernard.springframework.spring5webapp.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by nick on Oct 31, 2020
@@ -22,8 +21,21 @@ public class Publisher {
     private String state;
     private String zip;
 
+    // The simplest way to initialize a set is with a new empty hash set.
+    @OneToMany // one publisher can have many books
+    @JoinColumn(name = "publisher_id") // giving hibernate a hint to add a publisher id to the book record to tract the publisher
+    private Set<Book> books = new HashSet<>();
+
     // JPA Requires a no-args constructor
     public Publisher() {
+    }
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
     }
 
     @Override

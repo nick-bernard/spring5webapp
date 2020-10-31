@@ -46,20 +46,27 @@ public class BootStrapData implements CommandLineRunner{
         Book nineteenEightyFour = new Book("1984", "123456789");
         eric.getBooks().add(nineteenEightyFour);
         nineteenEightyFour.getAuthors().add(eric);
+        nineteenEightyFour.setPublisher(publisher);
+        publisher.getBooks().add(nineteenEightyFour);
 
-        // save the author and the book into the H2 database
+        // save the author and the book and publisher into the H2 database
         authorRepository.save(eric);
         bookRepository.save(nineteenEightyFour);
+        publisherRepository.save(publisher);
 
         Author god = new Author("Jesus", "Christ");
         Book bible = new Book("The Holy Bible", "666999666");
         god.getBooks().add(bible);
         bible.getAuthors().add(god);
+        bible.setPublisher(publisher);
+        publisher.getBooks().add(bible);
 
         // again, save to H2 Database
         authorRepository.save(god);
         bookRepository.save(bible);
+        publisherRepository.save(publisher);
 
         System.out.println("Number of Books: " + bookRepository.count());
+        System.out.println("Publisher Number of Books: " + publisher.getBooks().size());
     }
 }
