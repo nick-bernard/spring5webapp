@@ -27,6 +27,8 @@ public class BookController {
         // the books attribute, and with the bookRepository.findAll() method we'll get a list of
         // books. This model will get returned back to the view layer.
         model.addAttribute("books", bookRepository.findAll());
-        return "books";
+
+        // Look for the list template
+        return "list";
     }
 }
